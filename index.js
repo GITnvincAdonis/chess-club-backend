@@ -14,6 +14,7 @@ app.get("/events", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM events")
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
@@ -26,6 +27,7 @@ app.get("/events/search/:string", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM events WHERE event_name ILIKE $1 LIMIT 6",[searchString])
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
@@ -38,6 +40,7 @@ app.get("/events/:id", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM events WHERE id=$1",[id])
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
@@ -51,6 +54,7 @@ app.get("/studentOfficials", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM student_officials")
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
@@ -61,6 +65,7 @@ app.get("/teacherOfficials", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM teacher_officials")
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
@@ -75,6 +80,7 @@ app.get("/videos", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM video_content")
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
@@ -87,6 +93,7 @@ app.get("/videos/search/:string", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM video_content WHERE video_title ILIKE $1 LIMIT 6",[searchString])
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
@@ -99,6 +106,7 @@ app.get("/videos/:id", async(req, res)=>{
     try {
         const products = await pool.query("SELECT * FROM video_content WHERE id=$1",[id])
         console.log(products.rows)
+        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
         res.json(products.rows)
         
     } catch (error) {
