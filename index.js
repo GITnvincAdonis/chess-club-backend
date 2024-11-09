@@ -6,7 +6,10 @@ const pool = require("./db");
 const { parse } = require("dotenv");
 
 
-app.use(cors(  ));
+app.use(cors(   {
+    origin: 'https://chess-club-frontend-lime.vercel.app/#/Events',
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+}));
 app.use(express.json());
 
 //EVENTS BACKEND: General, Search Sort, Single ITEM
