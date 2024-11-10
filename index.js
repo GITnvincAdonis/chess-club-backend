@@ -28,10 +28,17 @@ app.get("/events/search/:string", async(req, res)=>{
     
     const searchString = `%${req.params.string}%`;
     try {
-        const products = await pool.query("SELECT * FROM events WHERE event_name ILIKE $1 LIMIT 6",[searchString])
-        console.log(products.rows)
-        res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
-        res.json(products.rows)
+        if(req.params.string != ""){
+            const products = await pool.query("SELECT * FROM events WHERE event_name ILIKE $1 LIMIT 6",[searchString])
+            console.log(products.rows)
+            res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
+            res.json(products.rows)}
+        else{
+            const products = await pool.query("SELECT * FROM events")
+            console.log(products.rows)
+            res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
+            res.json(products.rows)
+        }
         
     } catch (error) {
         console.error(error.message)
