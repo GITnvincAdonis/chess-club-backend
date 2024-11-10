@@ -28,7 +28,7 @@ app.get("/events/search/:string", async(req, res)=>{
     
     const searchString = `%${req.params.string}%`;
     try {
-        if(req.params.string != ""){
+        if(req.params.string != null){
             const products = await pool.query("SELECT * FROM events WHERE event_name ILIKE $1 LIMIT 6",[searchString])
             console.log(products.rows)
             res.setHeader('Cache-Control', 'no-store'); // Vercel-specific cache control
